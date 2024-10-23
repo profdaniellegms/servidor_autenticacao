@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h2>Home Page</h2>
+    <p>You have successfully logged in.</p>
+    <button id="logout-btn">Logout</button>
+    <script type="text/javascript" defer>
+        // Check if the token exists in localStorage
+        // const token = localStorage.getItem("token");
+        // if (!token) {
+        //     // If token doesn't exist, redirect to login page
+        //     window.location.href = "/";
+        // } else {
+        //     // Decode the JWT token (simplified, better to decode it server-side if needed)
+        //     const userPayload = JSON.parse(atob(token.split('.')[1]));
+        //     document.getElementById('user-email').textContent = userPayload.email;
+        // }
+
+        // Logout function
+        document.getElementById("logout-btn").addEventListener("click", function() {
+            console.log("passei aqui")
+            // Remove the JWT token from localStorage
+            // localStorage.removeItem("token");
+            // Optionally, clear the token from the server side (if using cookies)
+            fetch("/logout", { method: "POST" })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    window.location.href = "/"; // Redirect to login page
+                })
+                .catch(error => console.error("Error logging out:", error));
+        });
+    </script>
+</body>
+</html>
